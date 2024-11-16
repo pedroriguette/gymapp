@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GYMAPP - Exercicios
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4 g4">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'exercice_list' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="name" placeholder="Exercicio"
+                    value="{{ request.GET.name }}">
+                <button class="btn btn-primary">Procurar Exercicio</button>
+            </div>
+        </form>
+    </div>
+    {% if perms.exercises.add_exercice %}
+    <div class="col-md-6">
+        <a href="{% url 'exercice_create' %}" class="btn btn-success float-end">
+            <i class="bi-plus"></i>Novo Exercicio
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+
+<div class="row mb-4 g-4">
+    {% for exercice in exercises %}
+    <div class="col-md-3">
+        <div class="card border-light" style="width: 18rem;">
+            <a href="{% url 'exercice_detail' exercice.id %}">
+
+                {% if exercice.photo %}
+                <img src="{{ exercice.photo.url }}" class="card-img-top">
+                {% endif %}
+            </a>
+            {% if not exercice.photo %}
+            <p class="no-photo"> Foto não disponivel</p>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ exercice.name }}</h5>
+                <p class="card-text">{{ exercice.category }}</p>
+                <p class="card-text">Maquiná: {{ exercice.equipment }}</p>
+                {% if perms.exercises.change_exercice %}
+                <a href="{% url 'exercice_update' exercice.id %}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                {% endif %}
+                {% if perms.exercises.delete_exercice %}
+                <a href="{% url 'exercice_delete' exercice.id %}" class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

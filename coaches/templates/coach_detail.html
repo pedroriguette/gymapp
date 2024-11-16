@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row-mb-4">
+    <div class="col-md-3">
+        <div class="card border-light">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Id:</strong> {{ object.id }}</li>
+                <li class="list-group-item"><strong>Usuário:</strong> {{ object.user }}</li>
+                <li class="list-group-item"><strong>Nome Completo:</strong> {{ object.full_name }}</li>
+                <li class="list-group-item"><strong>Data de nascimento:</strong> {{ object.birthday }}</li>
+                <li class="list-group-item"><strong>Exercicio:</strong> {{ object.phone_number }}</li>
+                <li class="list-group-item"><strong>Especialidade:</strong> {{ object.specialty }}</li>
+                <li class="list-group-item"><strong>Data da contratação:</strong> {{ object.entry }}</li>
+                <li class="list-group-item"><strong>HR Entrada:</strong> {{ object.start_job }}</li>
+                <li class="list-group-item"><strong>HR Saída:</strong> {{ object.ends_job }}</li>
+                <li class="list-group-item"><strong>Dias de Expediente:</strong> {{ object.working_days }}</li>
+                <li class="list-group-item"><strong>Status:</strong> {{ object.status }}</li>
+                <li class="list-group-item"><strong>Criado em:</strong> {{ object.created_at }}</li>
+                <li class="list-group-item"><strong>Atualizado em:</strong> {{ object.updated_at }}</li>
+              </ul>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-md-auto g-3">
+                <a href="{% url 'coach_list' %}" class="btn btn-success mt-3">Voltar para lista</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

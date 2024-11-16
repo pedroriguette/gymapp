@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mb-4">
+    <h3 class="display-8">Cadastrar Grupo muscular</h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_name">Nome: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.name }}
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Grupo Muscular</button>
+            </form>
+        </div>
+    </div>
+    <a href="{% url 'muscle_group_list' %}" class="btn btn-success mt-3">Cancelar e voltar para lista</a>
+</div>
+
+{% endblock %}

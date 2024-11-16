@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mb-4">
+    <h3 class="display-8">Atualizar Aluno</h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_user">Usuario: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.user }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_full_name">Nome: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.full_name }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_birthday">Data de Nascimento: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.birthday }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Número de Telefone: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.phone_number }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Objetivo: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.objective }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Frequência: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.frequency }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Ativo: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.active }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Foto: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.photo }}
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Aluno</button>
+            </form>
+        </div>
+    </div>
+    {% if form.errors %}
+    <div class="alert alert-danger mt-4">
+        <ul class="mb-0">
+            {% for field in form %}
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <a href="{% url 'student_list' %}" class="btn btn-success mt-3">Cancelar e voltar para lista</a>
+</div>
+
+{% endblock %}

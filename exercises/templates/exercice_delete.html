@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-4 g4">
+    <div class="col-md-3">
+        <div class="card border-light">
+            <div class="card-body">
+                <h5 class="card-text">{{ object.name }}</h5>
+                <p class="card-text">Tem certeza que deseja excluir {{ object.name }} ?</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mt-3">Deletar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

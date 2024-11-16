@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-4 g-4">
+    <div class="col-md-3">
+        <div class="card border-light">
+            <div class="card-body">
+                <h5 class="card-title">Id: {{ object.id }}</h5>
+                <p class="card-text">Exercicio: {{ object.name }}</p>
+                <p class="card-text">Categoria: {{ object.category }}</p>
+                <p class="card-text">Grupo Muscular: 
+                    {% for muscle in object.muscle_groups.all %}
+                    {{ muscle.name }} {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p class="card-text">Dificuldade: {{ object.difficulty_level }}</p>
+                <p class="card-text">Equipamento: {{ object.equipment }}</p>
+                <p class="card-text">Maquiná: {{ object.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

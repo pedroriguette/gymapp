@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GYMAPP - Ficha de exercicios
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4 g4">
+    {% if request.user.is_staff %}
+    <div class="col-md-6">
+        <form method="get" action="{% url 'training_sheet_list' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="student" placeholder="Aluno"
+                value="{{ request.GET.student }}">
+                <button class="btn btn-primary">Procurar Ficha</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if perms.training_sheet.add_trainingsheet %}
+    <div class="col-md-6">
+        <a href="{% url 'training_sheet_create' %}" class="btn btn-success float-end">
+            <i class="bi-plus"></i>Nova Ficha
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row mb-4 g-4">
+    {% for group in groups %}
+        <div class="card border-secondary mb-3">
+            <div class="card-body">
+                <p class="card-text"><strong>Grupo: </strong>{{ group.name }} </p>
+                <div class="row mb-4 g-4">
+                    {% for sheet in training_sheets %}
+                    {% if sheet.group == group %}
+                    <div class="col-md-3">
+                        <div class="card border-light" style="width: 18rem;">
+                            {% if sheet.photo %}
+                                <img src="{{ sheet.exercice.photo.url }}" class="card-img-top">
+                            {% else %}
+                            <p class="no-photo" >Foto não disponível </p>
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text"><strong>Exercicio: </strong>{{ sheet.exercice }} </p>
+                                <p class="card-text"><strong>Aluno: </strong>{{ sheet.student }} </p>
+                                <p class="card-text"><strong>Repetições: </strong> {{ sheet.series }}x{{ sheet.repetitions }}</p>
+                                {% if perms.training_sheet.change_trainingsheet %}
+                                <a href="{% url 'training_sheet_update' sheet.id %}" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                {% endif %}
+                                {% if perms.training_sheet.delete_trainingsheet %}
+                                <a href="{% url 'training_sheet_delete' sheet.id %}" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                {% endif %}
+                            </div>  
+                        </div>
+                        
+                    </div>
+                    {% endif %} 
+                    {% endfor %} 
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

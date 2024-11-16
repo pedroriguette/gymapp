@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mb-4">
+    <h3 class="display-8">Cadastrar ficha</h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_user">Aluno: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.student }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_full_name">Treinador: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.coach }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_birthday">Exercicio </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.exercice }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Series: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.series }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Repetições: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.repetitions }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">descanso: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.time }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Grupo: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.group }}
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Ficha</button>
+            </form>
+        </div>
+    </div>
+    <a href="{% url 'training_sheet_list' %}" class="btn btn-success mt-3">Cancelar e voltar para lista</a>
+</div>
+
+{% endblock %}

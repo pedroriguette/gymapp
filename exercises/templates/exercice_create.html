@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mb-4">
+    <h3 class="dispay-4">Editar exercicio</h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_name">Exercicio: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.name }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_category">Categoria </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.category }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_muscle_group">Grupo Muscular: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.muscle_groups }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_difficulty_level">Nivel de Dificuldae </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.difficulty_level }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_equipment">Equipamento: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.equipment }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_photo">Foto: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.photo }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_description">Descrição: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.description }}
+                        </div>
+                        <div class="w-100"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Exercicio</button>
+            </form>
+        </div>
+    </div>
+    <a href="{% url 'exercice_list' %}" class="btn btn-success mt-3">Cancelar e voltar para lista</a>
+</div>
+
+{% endblock %}

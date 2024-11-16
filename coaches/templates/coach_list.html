@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-4 g4">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'coach_list' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="full_name" placeholder="Nome"
+                    value="{{ request.GET.full_name }}">
+                <button class="btn btn-primary"> Procurar Treinador </button>
+            </div>
+        </form>
+    </div>
+    {% if perms.coaches.add_coach %}
+    <div class="col-md-6">
+        <a href="{% url 'coach_create' %}" class="btn btn-success float-end">
+            <i class="bi-plus"></i>Novo Coach: 
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id :</th>
+                <th>Nome :</th>
+                <th>Especialidade :</th>
+                <th>Entrada :</th>
+                <th>Saída :</th>
+                <th>Status :</th>
+                <th>Ações: </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coach in coaches %}
+            <tr>
+                <td>{{ coach.id }}</td>
+                <td>{{ coach.full_name }}</td>
+                <td>{{ coach.specialty }}</td>
+                <td>{{ coach.start_job }}</td>
+                <td>{{ coach.ends_job }}</td>
+                {% if coach.status == 'AT' %}
+
+                <div class="card-body">
+                    <td>{{ coach.status }}
+                        <div class="p-1 bg-success btn-sm rounded-2 float-end" disabled>
+                            <div class="container">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                        </div>
+                    </td>
+                </div>
+                {% elif coach.status == 'FE' %}
+                <div class="card-body"></div>
+                    <td>{{ coach.status }}
+                        <div class="p-1 bg-success btn-sm rounded-2 float-end" disabled>
+                            <div class="container">
+                                <i class="bi bi-backpack3-fill"></i>
+                            </div>
+                        </div>
+                    </td>
+                </div>
+                {% else %}
+                <div class="card-body"></div>
+                    <td>{{ coach.status }}
+                        <div class="p-1 bg-danger btn-sm rounded-2 float-end" disabled>
+                            <div class="container">
+                                <i class="bi bi-x-circle-fill"></i>
+                            </div>
+                        </div>
+                    </td>
+                </div>
+                {% endif %}
+                <td>
+                    {% if perms.coaches.view_coach %}
+                    <a href="{% url 'coach_detail' coach.id %}" class="btn btn-info btn-sm">
+                        <i class="bi bi-eye"></i>
+                    </a>
+                    {% endif %}
+                    {% if perms.coaches.change_coach %}
+                    <a href="{% url 'coach_update' coach.id %}" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    {% endif %}
+                    {% if perms.coaches.delete_coach %}
+                    <a href="{% url 'coach_delete' coach.id %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'components/_pagination.html' %}
+
+{% endblock %}

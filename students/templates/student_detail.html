@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row-mb-4">
+    <div class="col-md-3">
+        <div class="card border-light" style="width: 18rem;">
+            {% if object.photo %}
+            <img src="{{ object.photo.url }}" class="card-img-top">
+            {% endif %}
+            {% if not object.photo %}
+            <p class="no-photo"> Foto não disponivel</p>
+            {% endif %}
+            <div class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Id: </strong> {{ object.id }}</li>
+                <li class="list-group-item"><strong>Usuário: </strong> {{ object.user }}</li>
+                <li class="list-group-item"><strong>Nome Completo: </strong> {{ object.full_name }}</li>
+                <li class="list-group-item"><strong>Data de nascimento: </strong> {{ object.birthday }}</li>
+                <li class="list-group-item"><strong>Telefone: </strong> {{ object.phone_number }}</li>
+                <li class="list-group-item"><strong>Objetivo: </strong> {{ object.objective }}</li>
+                <li class="list-group-item"><strong>Frequencia de Treino: </strong> {{ object.frequency }}</li>
+                {% if object.active == False %}
+                <li class="list-group-item"><strong>Ativo </strong> <i class="bi bi-x-circle-fill"></i></li>
+                {% else %}
+                <li class="list-group-item"><strong>Ativo: </strong> <i class="bi bi-check-circle-fill"></i></li>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-md-auto g-3">
+                <a href="{% url 'student_list' %}" class="btn btn-success mt-3">
+                    <i class="bi bi-arrow-left-circle"></i> Voltar para lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

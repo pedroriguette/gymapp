@@ -1,0 +1,74 @@
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% if user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post" id="logout-form" class="nav-link px-0 align-middle">
+        
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link text-decoration-none text-reset nav-link px-0 align-middle">
+          <span class="navbar-brand mb-0 h1">Olá {{ request.user }}</span>
+          <i class="bi bi-box-arrow-right fs-4 align-middle"></i>
+          <span class="ms-1 align-middle">Sair</span>
+        </button>
+      </form>
+      {% endif %}
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">GymApp</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav nav-tabs" id="myTab" role="tablist">
+            {% if perms.exercises.view_exercice %}
+            <li class="nav-item">
+              <a href="{% url 'exercice_list' %}" class="nav-link px-0 align-middle">
+                <div class="container-fluid">
+                  <span class="ms-1">Exercicios</span>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if perms.coaches.view_coach %}
+            <li class="nav-item">
+              <a href="{% url 'coach_list' %}" class="nav-link px-0 align-middle">
+                <div class="container-fluid">
+                  <span class="ms-1">Treinadores</span>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if perms.students.view_student %}
+            <li class="nav-item"></li>
+              <a href="{% url 'student_list' %}" class="nav-link px-0 align-middle">
+                <div class="container-fluid">
+                  <span class="ms-1">Alunos</span>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if perms.muscle_groups.view_musclegroups %}
+            <li class="nav-item">
+              <a href="{% url 'muscle_group_list' %}" class="nav-link px-0 align-middle">
+                <div class="container-fluid">
+                  <span class="ms-1">Grupos Musculares</span>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if perms.training_sheet.view_trainingsheet %}
+            <li class="nav-item">
+              <a href="{% url 'training_sheet_list' %}" class="nav-link px-0 align-middle">
+                <div class="container-fluid">
+                  <span class="ms-1">Ficha de Treino</span>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>

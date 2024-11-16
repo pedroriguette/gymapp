@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mb-8">
+    <h3 class="display-8">ATUALIZAR COACH:</h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="post" class="form">
+                {% csrf_token %}
+                <div class="container text-start">
+                    <div class="row">
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_user">Usuario: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.user }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_full_name">Nome: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.full_name }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_birthday">Data de Nascimento: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.birthday }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_phone_number">Número de Telefone: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.phone_number }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_specialty">Especialidade: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.specialty }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_entry">Dia da contratação: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.entry }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_start_job">Inicio de expediente: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.start_job }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_ends_job">Termíno de expediente: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.ends_job }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_working_days">Dias de Trabalho: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.working_days }}
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-6 col-md-4 g-4">
+                            <label for="id_status">Status: </label>
+                        </div>
+                        <div class="col g-4">
+                            {{ form.status }}
+                        </div>
+                    </div>
+                    {% if form.errors %}
+                    <div class="alert alert-danger mt-4">
+                        <ul class="mb-0">
+                            {% for field in form %}
+                            {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary">Salvar Professor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<a href="{% url 'training_sheet_list' %}" class="btn btn-success mt-3">Cancelar e voltar para lista</a>
+</div>
+
+{% endblock %}
