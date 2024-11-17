@@ -44,6 +44,19 @@ Para executar o projeto, você precisará:
     pip install -r requirements.txt
     ```
 
+## Banco de dados
+
+Caso não queira usar postgres, use essa configuração em app/settings.py:
+
+```bash
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+
 ## Rodar o projeto
 
 1. Após instalar as dependências, aplique as migrations no banco de dados com o comando:
