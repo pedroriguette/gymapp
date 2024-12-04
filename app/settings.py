@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gymapp',
         'USER': 'postgres',
-        'PASSWORD': 'pedrinpedra02',
+        'PASSWORD': '.',
         'HOST': 'localhost',
         'PORT': '5432',
     }
